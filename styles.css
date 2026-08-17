@@ -1,3 +1,5 @@
+picture{display:contents}
+
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#27312c;background:#fff}
 :root{--escuro:#183627;--medio:#496763;--texto:#27312c;--creme:#f3f1e8}
 .abertura{position:fixed;inset:0;z-index:1000;background:#26351d;overflow:hidden}.abertura video{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}.logo-abertura{position:absolute;left:.4%;top:.84%;width:21.75%}.entrar{position:absolute;right:4.1%;bottom:8%;border:0;background:transparent;color:#e7dfc3;display:flex;gap:8px;align-items:center;cursor:pointer}.entrar span{font:12.2px Arial,sans-serif;letter-spacing:.31em}.entrar i{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:#d8d0a7;color:#46553b;font:normal 18px Arial}.oculto{display:none}
@@ -250,7 +252,6 @@
     background:#eeebcf;
   }
   .hero-img{
-    content:url("assets/fundo-principal-mobile.png");
     position:absolute;
     z-index:0;
     inset:72px 0 auto 0;
@@ -316,32 +317,11 @@
 }
 
 
-/* V27 — seleção explícita da abertura por dispositivo.
-   Evita o navegador reutilizar o source desktop no modo responsivo. */
-.video-mobile { display: none; }
-.video-desktop { display: block; }
-@media (max-width: 600px) {
-  .abertura .video-desktop { display: none !important; }
-  .abertura .video-mobile {
-    display: block !important;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-  }
-}
-
-/* V28 — tablets em orientação vertical.
-   Usa a composição vertical dedicada, sem esticar o vídeo desktop. */
-@media (min-width: 601px) and (max-width: 1100px) and (orientation: portrait) {
-  .abertura .video-desktop { display: none !important; }
-  .abertura .video-mobile {
-    display: block !important;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-  }
+/* V27/V28 — vídeo único de abertura: o navegador escolhe a fonte certa
+   via <source media>, então não há mais duas classes/dois vídeos para alternar.
+   Mantido apenas o ajuste visual de enquadramento para telas estreitas/tablet retrato. */
+@media (max-width: 1100px) and (orientation: portrait) {
+  .abertura video{object-fit:cover;object-position:center center}
 }
 
 /* V29 — terceira seção: Entrelinhas. V28 preservada acima sem alterações. */
@@ -443,7 +423,7 @@
   .faixa-inferior .quina-organica{left:-10px;top:12px;width:190px;opacity:.72}
 
   /* Remove da imagem o branco que estava embutido no arquivo original. */
-  .entrelinhas-bg{content:url("assets/secao-entrelinhas-bg-crop.png");object-fit:cover;object-position:center center}
+  .entrelinhas-bg{content:url("assets/secao-entrelinhas-bg-crop.webp");object-fit:cover;object-position:center center}
 
   /* A seção começa diretamente no quadro bege, como no projeto de referência. */
   .entrelinhas-copy{left:7.05%;top:4.8%;width:35.8%}
@@ -462,7 +442,6 @@
    Desktop/tablet permanecem integralmente preservados. */
 @media (max-width:600px){
   .entrelinhas-bg{
-    content:url("assets/secao-entrelinhas-mobile.png");
     width:100%;
     height:190px;
     aspect-ratio:auto;
@@ -600,7 +579,6 @@
     background:#f5f3ed;
   }
   .sentido-bg{
-    content:url("assets/secao-sentido-mobile.png");
     position:relative;
     inset:auto;
     order:1;
@@ -661,7 +639,7 @@
   width:100%;
   aspect-ratio:947/423;
   overflow:hidden;
-  background-image:url("assets/secao-perguntas-bg.png");
+  background-image:url("assets/secao-perguntas-bg.webp");
   background-size:cover;
   background-position:center center;
   background-repeat:no-repeat;
@@ -1043,10 +1021,10 @@
 
 /* V59 — assets oficiais fornecidos pelo usuário para a seção de escuta. */
 .escuta-processo{
-  background:#f5f3eb url("assets/fundo-escuta-oficial.png") center center / cover no-repeat;
+  background:#f5f3eb url("assets/fundo-escuta-oficial.webp") center center / cover no-repeat;
 }
 .escuta-ornamento{
-  content:url("assets/linha-organica-oficial.png");
+  content:url("assets/linha-organica-oficial.webp");
   transform:none;
 }
 
@@ -1080,7 +1058,7 @@
   .escuta-esquerda{
     margin:0;
     padding:34px 7% 28px;
-    background:#f5f3eb url("assets/fundo-escuta-oficial.png") center center / cover no-repeat;
+    background:#f5f3eb url("assets/fundo-escuta-oficial.webp") center center / cover no-repeat;
   }
   .escuta-esquerda h2{
     margin-bottom:25px;
@@ -1116,7 +1094,7 @@
   .escuta-esquerda{
     padding:34px 7% 34px;
     background-color:#f5f3eb;
-    background-image:url("assets/fundo-escuta-oficial.png");
+    background-image:url("assets/fundo-escuta-oficial.webp");
     background-repeat:no-repeat;
     background-size:cover;
     /* desloca a faixa branca embutida no asset para fora do bloco visível */
@@ -1131,7 +1109,7 @@
   }
   .escuta-ornamento{
     display:block !important;
-    content:url("assets/linha-organica-oficial.png");
+    content:url("assets/linha-organica-oficial.webp");
     position:absolute;
     z-index:1;
     width:180px;
@@ -1155,7 +1133,7 @@
   .escuta-esquerda{
     margin:0;
     padding:34px 7% 34px;
-    background:#f2f0e7 url("assets/fundo-escuta-mobile-bege.png") center / 100% 100% no-repeat;
+    background:#f2f0e7 url("assets/fundo-escuta-mobile-bege.webp") center / 100% 100% no-repeat;
   }
   .escuta-direita{
     position:relative;
@@ -1166,7 +1144,7 @@
   }
   .escuta-ornamento{
     display:block !important;
-    content:url("assets/linha-organica-oficial.png");
+    content:url("assets/linha-organica-oficial.webp");
     position:absolute;
     width:155px;
     height:auto;
@@ -1367,7 +1345,7 @@
 .atendimento{width:100%;background:#fff;color:#27312c;}
 .atendimento-titulo{height:78px;display:flex;align-items:center;padding:0 5.2%;background:#fff;}
 .atendimento-titulo h2{margin:0;font-family:"Playfair Display",Georgia,serif;font-size:20.5px;line-height:1.08;font-weight:400;color:#496763;text-shadow:1px 1px 0 rgba(0,0,0,.24),2px 2px 0 rgba(73,103,99,.10);}
-.atendimento-passos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:38px;padding:30px 5.2% 25px;background:#f2f0e7 url('assets/fundo-atendimento-oficial.png') center 41%/cover no-repeat;}
+.atendimento-passos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:38px;padding:30px 5.2% 25px;background:#f2f0e7 url('assets/fundo-atendimento-oficial.webp') center 41%/cover no-repeat;}
 .atendimento-passo{min-width:0;}
 .passo-cab{display:grid;grid-template-columns:28px 27px 1fr;align-items:center;gap:8px;min-height:42px;margin-bottom:13px;}
 .passo-num{font-family:"Della Respira",Georgia,serif;font-size:31px;line-height:1;color:#4e642b;}
@@ -1381,7 +1359,7 @@
 .atendimento-cta{position:absolute;right:5.2%;bottom:28px;display:flex;align-items:center;gap:12px;text-decoration:none;font-family:Garet,Arial,sans-serif;font-size:11px;color:#4e642b;}
 .atendimento-cta span{display:grid;place-items:center;width:29px;height:20px;border-radius:12px;background:#496763;color:#fff;font:16px/1 Arial,sans-serif;}
 @media(max-width:1000px){.atendimento-passos{gap:20px;padding-left:4.5%;padding-right:4.5%;}.atendimento-passo>p{margin-left:0}.passo-cab{grid-template-columns:23px 23px 1fr;gap:6px}.passo-num{font-size:27px}.passo-cab img{width:23px;height:31px}.passo-cab h3{font-size:12.5px}.atendimento-frase{left:49%;width:45%;font-size:18.5px}.atendimento-linha{left:27%;}}
-@media(max-width:700px){.atendimento-titulo{height:88px;padding:0 7%;}.atendimento-titulo h2{font-size:20.5px}.atendimento-passos{display:block;padding:26px 7% 18px;background-position:center 40%;}.atendimento-passo{margin-bottom:28px}.passo-cab{grid-template-columns:30px 27px 1fr;margin-bottom:8px}.passo-num{font-size:30px}.passo-cab img{width:27px;height:36px}.passo-cab h3{font-size:13.7px}.atendimento-passo>p{margin-left:65px;font-size:12px;text-align:left;line-height:1.48}.atendimento-sigilo{padding:8px 7% 0;font-size:11px;white-space:normal}.atendimento-fecho{min-height:280px}.atendimento-frase{position:relative;left:auto;top:auto;width:auto;max-width:none;margin:0;padding:36px 7% 0;font-size:20.5px}.atendimento-linha{left:-8px;bottom:-85px;width:190px}.atendimento-cta{right:7%;bottom:28px;font-size:11px}}
+@media(max-width:700px){.atendimento-titulo{height:88px;padding:0 7%;}.atendimento-titulo h2{font-size:20.5px}.atendimento-passos{display:block;padding:26px 7% 18px;background:#f2f0e7;background-image:none;}.atendimento-passo{margin-bottom:28px}.passo-cab{grid-template-columns:30px 27px 1fr;margin-bottom:8px}.passo-num{font-size:30px}.passo-cab img{width:27px;height:36px}.passo-cab h3{font-size:13.7px}.atendimento-passo>p{margin-left:65px;font-size:12px;text-align:left;line-height:1.48}.atendimento-sigilo{padding:8px 7% 0;font-size:11px;white-space:normal}.atendimento-fecho{min-height:280px}.atendimento-frase{position:relative;left:auto;top:auto;width:auto;max-width:none;margin:0;padding:36px 7% 0;font-size:20.5px}.atendimento-linha{left:-8px;bottom:-85px;width:190px}.atendimento-cta{right:7%;bottom:28px;font-size:11px}}
 
 /* V70 — ajuste fino da seção "Como funciona" conforme layout aprovado no Canva — DESKTOP */
 @media (min-width:1001px){
@@ -1451,7 +1429,7 @@
   /* linha orgânica: usa o mesmo desenho oficial, apenas recortado da área
      transparente para permitir posicionamento fiel */
   .atendimento-linha{
-    content:url('assets/linha-organica-oficial.png');
+    content:url('assets/linha-organica-oficial.webp');
     left:31.8%;
     top:84px;
     bottom:auto;
@@ -1466,7 +1444,7 @@
 
 
 /* V72 — padronização da linha orgânica oficial.
-   Todas as ocorrências usam assets/linha-organica-oficial.png;
+   Todas as ocorrências usam assets/linha-organica-oficial.webp;
    cada seção mantém apenas suas regras de tamanho/posição responsivas. */
 
 /* V73 — aprimoramentos de experiência e interação.
@@ -1537,7 +1515,7 @@ a:focus-visible,button:focus-visible{
 .roberto-perfil{position:relative;display:grid;grid-template-columns:24.6% 75.4%;grid-template-rows:minmax(502px,auto) 66px;width:100%;background:#fff;overflow:hidden}
 .roberto-foto-wrap{grid-column:1;grid-row:1;overflow:hidden;background:#111}
 .roberto-foto{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
-.roberto-conteudo{position:relative;grid-column:2;grid-row:1;padding:15px 29% 28px 4.5%;background:#f1efe5 url('assets/fundo-roberto.png') center/cover no-repeat;color:#000}
+.roberto-conteudo{position:relative;grid-column:2;grid-row:1;padding:15px 29% 28px 4.5%;background:#f1efe5 url('assets/fundo-roberto.webp') center/cover no-repeat;color:#000}
 .roberto-conteudo h2{margin:0 0 15px;font-family:"Playfair Display",Georgia,serif;font-size:20.5px;line-height:1.1;font-weight:400;color:#183627;text-shadow:1px 1px 0 rgba(0,0,0,.24),2px 2px 0 rgba(24,54,39,.08)}
 .roberto-conteudo p{max-width:660px;margin:0 0 31px;font-family:Aileron,Arial,sans-serif;font-size:12.7px;line-height:1.62;font-weight:400;color:#000;text-align:justify}
 .roberto-conteudo p:last-of-type{margin-bottom:0}
@@ -1636,7 +1614,7 @@ a:focus-visible,button:focus-visible{
     height:450px;
     box-sizing:border-box;
     padding:10px 18.5% 18px 1.8%;
-    background:#f1efe5 url('assets/fundo-roberto.png') center/cover no-repeat;
+    background:#f1efe5 url('assets/fundo-roberto.webp') center/cover no-repeat;
   }
   .roberto-conteudo h2{
     margin:0 0 13px;
@@ -1700,7 +1678,7 @@ a:focus-visible,button:focus-visible{
     right:0;
     top:40px;
     bottom:58px;
-    background:#f1efe5 url('assets/fundo-roberto.png') center/cover no-repeat;
+    background:#f1efe5 url('assets/fundo-roberto.webp') center/cover no-repeat;
   }
   .roberto-conteudo h2{
     margin:0 0 19px;
@@ -1773,7 +1751,7 @@ a:focus-visible,button:focus-visible{
     box-sizing:border-box;
     width:100%;
     padding:18px 7% 22px;
-    background:#f1efe5 url('assets/fundo-roberto.png') center/cover no-repeat;
+    background:#f1efe5 url('assets/fundo-roberto.webp') center/cover no-repeat;
     overflow:hidden;
   }
   .roberto-texto p{
@@ -1848,7 +1826,7 @@ a:focus-visible,button:focus-visible{
   width:100%;
   aspect-ratio:1366 / 768;
   min-height:0;
-  background-image:url('assets/fundo-reflexao.png');
+  background-image:url('assets/fundo-reflexao.webp');
   background-size:100% 100%;
   background-position:center;
   background-repeat:no-repeat;
@@ -2084,7 +2062,6 @@ a:focus-visible,button:focus-visible{
     height:330px;
   }
   .contato-final__bg{
-    content:url("assets/contato-final-bg-mobile.png");
     width:100%;
     height:100%;
     object-fit:cover;
